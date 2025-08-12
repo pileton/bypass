@@ -1,29 +1,16 @@
-package com.example.addon.hud;
+package your.addon;
 
-import com.example.addon.AddonTemplate;
-import meteordevelopment.meteorclient.systems.hud.HudElement;
-import meteordevelopment.meteorclient.systems.hud.HudElementInfo;
-import meteordevelopment.meteorclient.systems.hud.HudRenderer;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import meteordevelopment.meteorclient.addons.MeteorAddon;
+import meteordevelopment.meteorclient.systems.modules.Modules;
+import meteordevelopment.meteorclient.systems.modules.Category;
 
-public class HudExample extends HudElement {
-    /**
-     * The {@code name} parameter should be in kebab-case.
-     */
-    public static final HudElementInfo<HudExample> INFO = new HudElementInfo<>(AddonTemplate.HUD_GROUP, "example", "HUD element example.", HudExample::new);
-
-    public HudExample() {
-        super(INFO);
-    }
+public class BypassUtilsAddon extends MeteorAddon {
+    public static final Category CATEGORY = new Category("Bypass & Utilities");
 
     @Override
-    public void render(HudRenderer renderer) {
-        setSize(renderer.textWidth("Example element", true), renderer.textHeight(true));
-
-        // Render background
-        renderer.quad(x, y, getWidth(), getHeight(), Color.LIGHT_GRAY);
-
-        // Render text
-        renderer.text("Example element", x, y, Color.WHITE, true);
+    public void onInitialize() {
+        System.out.println("Bypass & Utilities Addon Loaded!");
+        Modules.get().add(new AntiChatMute());
+        Modules.get().add(new AutoMLG());
     }
 }
